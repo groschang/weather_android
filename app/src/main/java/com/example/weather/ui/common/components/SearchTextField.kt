@@ -21,6 +21,7 @@ import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.platform.SoftwareKeyboardController
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
@@ -77,7 +78,8 @@ fun SearchTextField(
                 } else {
                     false
                 }
-            },
+            }
+            .testTag("SearchTextField"),
         shape = RoundedCornerShape(32.dp),
         value = searchQuery,
         keyboardOptions = KeyboardOptions(

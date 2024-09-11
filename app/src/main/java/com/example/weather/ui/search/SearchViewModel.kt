@@ -29,7 +29,9 @@ class SearchViewModel(private val weatherRepository: WeatherRepository) : ViewMo
     }
 
     fun onSearchTriggered(query: String) {
-        searchCity(query)
+        if (query.length >= MIN_QUERY_LENGTH) {
+            searchCity(query)
+        }
     }
 
     fun searchCity(city: String) {

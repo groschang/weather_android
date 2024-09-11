@@ -75,6 +75,7 @@ dependencies {
     implementation(libs.mediation.test.suite)
     implementation(libs.protolite.well.known.types)
     implementation(libs.androidx.tv.material)
+    implementation(libs.androidx.foundation.android)
 
     ///Retrofit https://square.github.io/retrofit/
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
@@ -91,6 +92,8 @@ dependencies {
     implementation(libs.okhttp)
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation(libs.androidx.ui.text.google.fonts)
+    implementation(libs.core.ktx)
+    implementation(libs.core)
 
     // Room
     val room_version = "2.6.1"
@@ -100,9 +103,17 @@ dependencies {
     implementation("androidx.room:room-ktx:$room_version")
 
     // Preferences DataStore
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
 
     testImplementation(libs.junit)
+    testImplementation(libs.androidx.espresso.core)
+    testImplementation(libs.androidx.core.ktx)
+    testImplementation(libs.androidx.junit)
+    testImplementation("androidx.room:room-ktx:$room_version")
+    testImplementation(libs.robolectric)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

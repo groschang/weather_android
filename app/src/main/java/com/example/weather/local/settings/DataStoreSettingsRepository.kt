@@ -16,7 +16,7 @@ class DataStoreSettingsRepository(
     private val dataStore: DataStore<Preferences>
 ) : SettingsRepository {
 
-    private companion object {
+    companion object {
         val USER_NAME = stringPreferencesKey("city_id")
     }
 
