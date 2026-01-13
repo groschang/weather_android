@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Погода</string>
+    <string name="loading">Загрузка</string>
+    <string name="loading_failed">Ошибка загрузки</string>
+    <string name="retry">Повторить</string>
+    <string name="back_button">Назад</string>
+    <string name="settings">Настройки</string>
+    <string name="home">Главная</string>
+    <string name="menu">Меню</string>
+    <string name="search">Поиск</string>
+    <string name="manage">Управление</string>
+    <string name="add_location">Добавить местоположение</string>
+    <string name="manage_locations">Управление местоположениями</string>
+    <string name="add">Добавить</string>
+    <string name="clear">Очистить</string>
+    <string name="search_new_location">Найти новое местоположение</string>
+    <string name="manage_location">Управление местоположением</string>
+    <string name="remove_location">Удалить местоположение</string>
+    <string name="today">Сегодня</string>
+    <string name="select_location">Выбрать местоположение</string>
+</resources>

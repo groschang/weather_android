@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Météo</string>
+    <string name="loading">Chargement</string>
+    <string name="loading_failed">Échec du chargement</string>
+    <string name="retry">Réessayer</string>
+    <string name="back_button">Retour</string>
+    <string name="settings">Paramètres</string>
+    <string name="home">Accueil</string>
+    <string name="menu">Menu</string>
+    <string name="search">Rechercher</string>
+    <string name="manage">Gérer</string>
+    <string name="add_location">Ajouter un lieu</string>
+    <string name="manage_locations">Gérer les lieux</string>
+    <string name="add">Ajouter</string>
+    <string name="clear">Effacer</string>
+    <string name="search_new_location">Rechercher un nouveau lieu</string>
+    <string name="manage_location">Gérer le lieu</string>
+    <string name="remove_location">Supprimer le lieu</string>
+    <string name="today">Aujourd\'hui</string>
+    <string name="select_location">Sélectionner un lieu</string>
+</resources>

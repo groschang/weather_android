@@ -7,6 +7,6 @@
 # Location of the SDK. This is only used by Gradle.
 # For customization when using a Version Control System, please read the
 # header note.
-sdk.dir=
+sdk.dir=/Users/YourName/Library/Android/sdk
 API_KEY="secret"
 BASE_URL="https://dataservice.accuweather.com"

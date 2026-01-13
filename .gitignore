@@ -1,33 +1,95 @@
-# Gradle files
+# Built application files
+*.apk
+*.aar
+*.ap_
+*.aab
+
+# Files for the ART/Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+out/
+
+# Android Studio generated files
 .gradle/
+.idea/
+*.iml
+*.iws
+*.hprof
+captures/
+.dump
+.navigation/
+
+# Built application files
 build/
 
 # Local configuration file (sdk path, etc)
 local.properties
 
-# Log/OS Files
+# Log Files
 *.log
 
-# Android Studio generated files and folders
-captures/
-.externalNativeBuild/
-.cxx/
-*.apk
-output.json
-
-# IntelliJ
-*.iml
-.idea/
-misc.xml
-deploymentTargetDropDown.xml
-render.experimental.xml
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
 # Keystore files
 *.jks
 *.keystore
 
-# Google Services (e.g. APIs or Firebase)
-google-services.json
+# Debug/profiling traces
+*.trace
 
-# Android Profiling
-*.hprof
+# Project-specific temporary files
+.settings/
+.loadavg
+.tmp
+
+# Android coverage reports
+coverage/
+
+# Firebase test reports
+firebase/
+
+# External native build folder
+.externalNativeBuild
+
+# Android Studio native profiling data
+*.su
+
+# Android device state
+*.dms
+
+# Gradle cache
+.gradle/
+
+# IDE cache
+.cache
+
+# Android lint warnings
+lint-results.xml
+
+# Proguard logs
+proguard/
+
+# Android packaging
+*.ap_
+
+# Android emulator
+*.qcow2
+
+# Android build cache
+.caches/
+
+# Android Studio crash reports
+studio-recentProjects.xml

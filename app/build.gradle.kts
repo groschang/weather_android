@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.hilt)
 
     id("com.google.devtools.ksp")
     id("androidx.room")
@@ -10,23 +11,45 @@ plugins {
 }
 
 android {
-    namespace = "com.example.weather"
-    compileSdk = 34
+    namespace = "com.conrad.weather"
+    compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.weather"
-        minSdk = 24
-        targetSdk = 34
+        applicationId = "com.conrad.weather"
+        minSdk = 26
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.conrad.weather.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
+        }
+        
+        // Include both 32-bit and 64-bit ARM architectures
+        ndk {
+            abiFilters.addAll(arrayListOf("armeabi-v7a", "arm64-v8a"))
+        }
+    }
+
+    flavorDimensions += "version"
+    productFlavors {
+        create("mock") {
+            applicationIdSuffix = ".mock"
+            versionNameSuffix = "-mock"
+            dimension = "version"
+        }
+        create("prod") {
+            applicationIdSuffix = ".prod"
+            versionNameSuffix = "-prod"
+            dimension = "version"
         }
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -36,18 +59,12 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     buildFeatures {
         compose = true
         buildConfig = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
     }
     room {
         schemaDirectory("$projectDir/schemas")
@@ -57,30 +74,71 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    
+    // Reduce APK size
+    packaging {
+        jniLibs {
+            useLegacyPackaging = false
+        }
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "META-INF/DEPENDENCIES"
+            excludes += "META-INF/LICENSE"
+            excludes += "META-INF/LICENSE.txt"
+            excludes += "META-INF/license.txt"
+            excludes += "META-INF/NOTICE"
+            excludes += "META-INF/NOTICE.txt"
+            excludes += "META-INF/notice.txt"
+            excludes += "META-INF/ASL2.0"
+            excludes += "META-INF/AL2.0"
+            excludes += "META-INF/LGPL2.1"
+            // Exclude unnecessary resources
+            excludes += "kotlin/**"
+            excludes += "kotlinx/**"
+            excludes += "**/*.kotlin_builtins"
+            excludes += "**/*.kotlin_metadata"
+        }
+    }
+    
+    // Split APKs by ABI to reduce size
+    splits {
+        abi {
+            reset()
+            include("armeabi-v7a", "arm64-v8a")
+            isUniversalApk = false
+        }
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+    }
 }
 
 dependencies {
 
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation("androidx.navigation:navigation-compose:2.7.5")
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.tv.material)
+    implementation(libs.androidx.foundation.android)
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.mediation.test.suite)
     implementation(libs.protolite.well.known.types)
-    implementation(libs.androidx.tv.material)
-    implementation(libs.androidx.foundation.android)
 
-    ///Retrofit https://square.github.io/retrofit/
-    implementation("com.squareup.retrofit2:retrofit:2.11.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
-    implementation("com.squareup.retrofit2:converter-kotlinx-serialization:2.11.0")
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.retrofit.converter.kotlinx.serialization)
 
     implementation("androidx.compose.material:material-icons-extended")
 
@@ -90,39 +148,52 @@ dependencies {
 
     // OkHttp
     implementation(libs.okhttp)
-    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation(libs.okhttp.logging.interceptor)
     implementation(libs.androidx.ui.text.google.fonts)
     implementation(libs.core.ktx)
     implementation(libs.core)
 
     // Room
-    val room_version = "2.6.1"
-    implementation("androidx.room:room-runtime:$room_version")
-    annotationProcessor("androidx.room:room-compiler:$room_version")
-    ksp("androidx.room:room-compiler:$room_version")
-    implementation("androidx.room:room-ktx:$room_version")
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
 
     // Preferences DataStore
-    implementation("androidx.datastore:datastore-preferences:1.1.1")
+    implementation(libs.androidx.datastore.preferences)
 
+    // Hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    implementation(libs.hilt.navigation.compose)
+
+    testImplementation(libs.androidx.room.ktx)
+    testImplementation(libs.robolectric)
     testImplementation(libs.junit)
     testImplementation(libs.androidx.espresso.core)
     testImplementation(libs.androidx.core.ktx)
+    testImplementation(libs.androidx.core.testing)
     testImplementation(libs.androidx.junit)
-    testImplementation("androidx.room:room-ktx:$room_version")
-    testImplementation(libs.robolectric)
     testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    testImplementation(libs.hilt.android.testing)
+    kspTest(libs.hilt.compiler)
+
+    testImplementation(libs.mockk.android)
+    testImplementation(libs.mockk.agent)
 
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation(libs.hilt.android.testing)
+    kspAndroidTest(libs.hilt.compiler)
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    testImplementation(project(":app"))
+    androidTestImplementation(project(":app"))
 }
 
 ksp {

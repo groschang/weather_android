@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">天气</string>
+    <string name="loading">加载中</string>
+    <string name="loading_failed">加载失败</string>
+    <string name="retry">重试</string>
+    <string name="back_button">返回</string>
+    <string name="settings">设置</string>
+    <string name="home">首页</string>
+    <string name="menu">菜单</string>
+    <string name="search">搜索</string>
+    <string name="manage">管理</string>
+    <string name="add_location">添加位置</string>
+    <string name="manage_locations">管理位置</string>
+    <string name="add">添加</string>
+    <string name="clear">清空</string>
+    <string name="search_new_location">查找新位置</string>
+    <string name="manage_location">管理位置</string>
+    <string name="remove_location">删除位置</string>
+    <string name="today">今天</string>
+    <string name="select_location">选择位置</string>
+</resources>
