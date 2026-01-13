@@ -12,10 +12,10 @@
 A modern, feature-rich weather application built with Jetpack Compose and Kotlin, designed to provide accurate weather forecasts with an intuitive user experience. The application leverages the AccuWeather API to deliver real-time weather data with offline caching capabilities.
 
 <p align="center">
-<img style="width: 220px" src="assets/screen1.png"> 
-<img style="width: 220px" src="assets/screen2.png">
-<img style="width: 220px" src="assets/screen3.png">
-<img style="width: 220px" src="assets/screen4.png">
+<img style="width: 200px" src="assets/screen1.png"> 
+<img style="width: 200px" src="assets/screen2.png">
+<img style="width: 200px" src="assets/screen3.png">
+<img style="width: 200px" src="assets/screen4.png">
 </p>
 
 ## 🌟 Features
